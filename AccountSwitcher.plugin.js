@@ -640,7 +640,14 @@ class AccountSwitcher {
 				}
 				NeatoLib.showToast(userList, "info", {"timeout": 10000})
 			}else{
-				console.log("DontSpam")
+				if(document.getElementById('accountswitcher-fasttoken-toast') == null){
+					NeatoLib.showToast("<div id='accountswitcher-fasttoken-toast'></div>\
+					Token: <input id='accountswitcher-fasttoken-toast-token' type='text'> <button id='accountswitcher-fasttoken-toast-btn'>Login</button>", "warning", {"timeout": 10000});
+					document.getElementById('accountswitcher-fasttoken-toast-btn').onclick = function(){
+						let fakeAccountManager = NeatoLib.Modules.get(["loginToken"]);
+						fakeAccountManager.loginToken(document.getElementById('accountswitcher-fasttoken-toast-token').value);
+					}
+				}
 			}
 		});
 	}
